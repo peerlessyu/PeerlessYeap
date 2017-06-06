@@ -7,10 +7,12 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
+import com.peerlessyu.peerless.bean.Book;
 import com.peerlessyu.peerless.bean.FuncBean;
 import com.peerlessyu.peerless.rv.MultiItemTypeAdapter;
 import com.peerlessyu.peerless.rv.RvCommonAdapter;
 import com.peerlessyu.peerless.rv.ViewHolder;
+import com.peerlessyu.peerless.view.BookActivity;
 import com.peerlessyu.peerless.view.IdiomActivity;
 
 import java.util.ArrayList;
@@ -30,6 +32,7 @@ public class FunctionListActivity extends AppCompatActivity {
         rv.setLayoutManager(manager);
         list = new ArrayList<>();
         list.add(new FuncBean(getString(R.string.Idiom), IdiomActivity.class));
+        list.add(new FuncBean(getString(R.string.Book), BookActivity.class));
         adapter = new RvCommonAdapter<FuncBean>(this, R.layout.item_func, list) {
             @Override
             protected void convert(ViewHolder holder, FuncBean s, int position) {

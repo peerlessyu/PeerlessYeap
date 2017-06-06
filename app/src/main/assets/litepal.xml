@@ -33,6 +33,7 @@
     -->
     <list>
         <mapping class="com.peerlessyu.peerless.bean.Idiom" />
+        <mapping class="com.peerlessyu.peerless.bean.Book" />
     </list>
 
     <!--

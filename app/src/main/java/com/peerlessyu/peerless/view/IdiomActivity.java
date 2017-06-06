@@ -63,7 +63,6 @@ public class IdiomActivity extends Activity {
                 if (!TextUtils.isEmpty(d) && list.size() > 0) {
                     for (Idiom idiom : list) {
                         if (idiom.getName().contains(d)) {
-                            Log.e("aaa", d);
                             runOnUiThread(new Runnable() {
                                 @Override
                                 public void run() {
