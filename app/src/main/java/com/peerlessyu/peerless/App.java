@@ -54,4 +54,5 @@ public class App extends LitePalApplication {
         // Initialize ImageLoader with configuration.
         ImageLoader.getInstance().init(config);
     }
+    //对立统一
 }

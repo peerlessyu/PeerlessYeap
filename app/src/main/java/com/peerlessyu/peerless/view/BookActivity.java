@@ -2,14 +2,20 @@ package com.peerlessyu.peerless.view;
 
 import android.content.DialogInterface;
 import android.support.design.widget.FloatingActionButton;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
+import android.widget.Toast;
 
+import com.google.gson.Gson;
 import com.peerlessyu.peerless.R;
 import com.peerlessyu.peerless.bean.Book;
 import com.peerlessyu.peerless.bean.Idiom;
@@ -33,6 +39,7 @@ public class BookActivity extends AppCompatActivity {
     private RecyclerView rv;
     private FloatingActionButton fab;
     private Format format;
+    private ActionBar actionBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,6 +50,8 @@ public class BookActivity extends AppCompatActivity {
         list = new ArrayList<>();
         format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         rv.setLayoutManager(new LinearLayoutManager(this));
+        actionBar = getSupportActionBar();
+        actionBar.setDisplayHomeAsUpEnabled(true);
         adapter = new RvCommonAdapter<Book>(this, R.layout.item_book, list) {
             @Override
             protected void convert(ViewHolder holder, Book book, int position) {
@@ -93,6 +102,31 @@ public class BookActivity extends AppCompatActivity {
             }
         });
         resetList();
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                finish();
+                break;
+            case R.id.action_output:
+                if (list != null && list.size() > 0) {
+                    Gson gson = new Gson();
+                    DlgFactory.showOutput(this, gson.toJson(list));
+                }
+                break;
+            case R.id.action_input:
+                break;
+        }
+        return true;
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater menuInflater = getMenuInflater();
+        menuInflater.inflate(R.menu.mian_menu, menu);
+        return super.onCreateOptionsMenu(menu);
     }
 
     private void resetList() {
